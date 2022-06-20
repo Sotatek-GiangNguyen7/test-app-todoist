@@ -3,8 +3,13 @@ package src.core.api;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.http.Method;
+import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
+
+import java.io.ObjectInput;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import static com.jayway.restassured.RestAssured.*;
 
@@ -37,13 +42,16 @@ public class APIRequest {
         return this;
     }
 
-    public APIRequest post(String url){
-        request.body(content.toString()).then().post(url).statusCode();
-        return this;
+    public APIResponse post(String url){
+        var response = request.body(content.toString()).then().post(url);
+        APIResponse res = new APIResponse(response);
+        return res;
     }
 
-    public APIRequest getResponse (){
-        request.get().then().log().all();
-        return this;
+    public APIResponse getResponse (){
+        var response = request.get();
+        APIResponse res = new APIResponse(response);
+        return res;
     }
+
 }

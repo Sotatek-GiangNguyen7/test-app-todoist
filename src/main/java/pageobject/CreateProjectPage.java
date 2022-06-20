@@ -12,6 +12,7 @@ public class CreateProjectPage extends AndroidDriverAction {
 
     By menuBtn   = By.xpath("//android.widget.ImageButton[@content-desc=\"Menu\"]");
     By projectName   = By.id("com.todoist:id/name");
+    By submitBtn   = By.id("com.todoist:id/menu_form_submit");
     By getText   = By.xpath("//android.widget.TextView[@text='Shopping list']");
 
 
@@ -21,7 +22,10 @@ public class CreateProjectPage extends AndroidDriverAction {
     }
 
     public void createProjectBtn(){
-        tapAction(120,887);
+        tapAction(1019,880);
+    }
+    public void addProject(){
+        clickElement(submitBtn);
     }
 
     public void inputProjectName(String value){
@@ -31,5 +35,6 @@ public class CreateProjectPage extends AndroidDriverAction {
         selectMenu();
         createProjectBtn();
         inputProjectName(value);
+        addProject();
     }
 }

@@ -39,7 +39,7 @@ public class AppTodoiestTest extends TestSetUp {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login();
 
-        //create task
+        //create task in project just created
         String titleTask = "Task " + DataGenerateUtils.randomString(5);
         String taskDescription = "Description " + DataGenerateUtils.randomString(10);
         CreateTaskPage createTaskPage = new CreateTaskPage(driver);

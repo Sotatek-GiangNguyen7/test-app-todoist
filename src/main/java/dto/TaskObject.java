@@ -1,4 +1,5 @@
 package dto;
+
 public class TaskObject {
     public String id;
     public String assigner;
@@ -15,6 +16,7 @@ public class TaskObject {
     public String created;
     public Due due;
     public String url;
+
     public class Due {
         public String date;
         public String string;

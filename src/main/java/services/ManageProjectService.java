@@ -1,15 +1,15 @@
 package services;
 
-import configuration.Constant;
 import com.google.gson.Gson;
 import com.jayway.restassured.http.ContentType;
+import configuration.Constant;
 import dto.ProjectObject;
 import src.core.api.APIRequest;
 import src.core.api.APIResponse;
 
 public class ManageProjectService {
 
-    public void createProjectAPI(String token, String name){
+    public void createProjectAPI(String token, String name) {
         APIRequest apiRequest = new APIRequest();
         apiRequest
                 .setInstances()
@@ -18,8 +18,8 @@ public class ManageProjectService {
                 .setBody("name", name)
                 .post(Constant.API_PROJECT);
     }
-    public APIResponse getDataRequest(String token)
-    {
+
+    public APIResponse getDataRequest(String token) {
         APIRequest apiRequest = new APIRequest();
         APIResponse res = apiRequest.setBaseURI(Constant.API_PROJECT)
                 .setInstances()
@@ -27,15 +27,16 @@ public class ManageProjectService {
                 .getResponse();
         return res;
     }
-    public ProjectObject[] getProjectDetail(String token){
+
+    public ProjectObject[] getProjectDetail(String token) {
         APIResponse response = getDataRequest(token);
         String a = response.getBody();
         Gson gson = new Gson();
-        ProjectObject[] nameObject = gson.fromJson(a,ProjectObject[].class);
+        ProjectObject[] nameObject = gson.fromJson(a, ProjectObject[].class);
         return nameObject;
     }
-    public String getNameNewestName(String token)
-    {
+
+    public String getNameNewestName(String token) {
         ProjectObject[] nameObject = getProjectDetail(token);
         return nameObject[nameObject.length - 1].name;
     }

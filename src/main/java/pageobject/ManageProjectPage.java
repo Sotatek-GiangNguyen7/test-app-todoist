@@ -6,26 +6,26 @@ import org.openqa.selenium.By;
 import src.core.driver.AndroidDriverAction;
 
 public class ManageProjectPage extends AndroidDriverAction {
-    public ManageProjectPage(AndroidDriver<MobileElement> driver){
+    By menuBtn = By.xpath("//android.widget.ImageButton[@content-desc=\"Menu\"]");
+    By manageProjectsElm = By.xpath("//android.widget.TextView[@text='Manage projects']");
+    String getText = "//android.widget.TextView[@text='%s']";
+
+    public ManageProjectPage(AndroidDriver<MobileElement> driver) {
         super(driver);
     }
 
-    By menuBtn   = By.xpath("//android.widget.ImageButton[@content-desc=\"Menu\"]");
-    By manageProjectsElm   = By.xpath("//android.widget.TextView[@text='Manage projects']");
-    By getText   = By.xpath("//android.widget.TextView[@text='Shopping list']");
-
-
-    public void selectMenu(){
+    public void selectMenu() {
         clickElement(menuBtn);
         wait(5000);
     }
 
-    public void clickManageProject(){
+    public void clickManageProject() {
         clickElement(manageProjectsElm);
     }
 
-    public String getProjectName(){
-        return getText(getText);
+    public String getProjectName(String projectName) {
+        String name = String.format(getText, projectName);
+        return getText(By.xpath(name));
     }
 
 }

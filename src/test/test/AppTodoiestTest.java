@@ -1,4 +1,6 @@
+import common.ValueCom;
 import configuration.Constant;
+import dto.ProjectObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageobject.CreateTaskPage;
@@ -11,41 +13,44 @@ import src.core.driver.TestSetUp;
 import src.core.resource.utils.DataGenerateUtils;
 
 public class AppTodoiestTest extends TestSetUp {
-    @Test
+    private String projectName;
+    @Test(priority = 0)
     public void createProjectAPI() throws InterruptedException {
         //Create project API
         ManageProjectService manageProjectService = new ManageProjectService();
-        manageProjectService.createProjectAPI(Constant.TOKEN, DataGenerateUtils.randomString(5));
+        projectName = "Project " + DataGenerateUtils.randomString(5);
+        manageProjectService.createProjectAPI(Constant.TOKEN, projectName);
 
         //Login into mobile application
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login();
 
+        //Goto manage project
         ManageProjectPage manageProjectPage = new ManageProjectPage(driver);
         manageProjectPage.selectMenu();
         manageProjectPage.clickManageProject();
 
         //Compare project name just created
-        Assert.assertEquals(manageProjectPage.getProjectName(),manageProjectService.getNameNewestName(Constant.TOKEN),"Project name was wrong");
+        Assert.assertEquals(manageProjectPage.getProjectName(projectName),manageProjectService.getNameNewestName(Constant.TOKEN),"Project name was wrong");
     }
-    @Test
-    public void createTaskMobile(){
+    @Test(priority = 1)
+    public void createTaskMobile() {
         //Login into mobile application
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login();
 
         //create task
-        String titleTask = DataGenerateUtils.randomString(5);
-        String taskDescription = DataGenerateUtils.randomString(10);
+        String titleTask = "Task " + DataGenerateUtils.randomString(5);
+        String taskDescription = "Description " + DataGenerateUtils.randomString(10);
         CreateTaskPage createTaskPage = new CreateTaskPage(driver);
-        createTaskPage.createTask(titleTask,taskDescription);
+        createTaskPage.createTask(titleTask, taskDescription, projectName);
 
         //Compare task name just created with API
         ManageTaskService manageTaskService = new ManageTaskService();
-        Assert.assertEquals(titleTask, manageTaskService.getNewestContent(Constant.TOKEN),"task name was wrong");
+        Assert.assertEquals(titleTask, manageTaskService.getNewestContent(Constant.TOKEN), "task name was wrong");
     }
-    @Test
-    public void reopenTask(){
+    @Test(priority = 2)
+    public void reopenTask() {
         //login
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login();
@@ -56,16 +61,18 @@ public class AppTodoiestTest extends TestSetUp {
 
         //get title task UI before close task
         ManageTaskPage manageTaskPage = new ManageTaskPage(driver);
-        String titleUI = manageTaskPage.getTitleTask();
+        manageTaskPage.openProject(projectName);
+        String titleTaskUI = manageTaskPage.getTitleTask();
 
         //complete task
         CreateTaskPage createTaskPage = new CreateTaskPage(driver);
-        createTaskPage.ClickCompleteTask();
+        createTaskPage.clickCompleteTask();
 
         //reopen Task via API
         manageTaskService.reOpenTaskAPI(id, Constant.TOKEN);
 
         //Compare task just created
-        Assert.assertEquals(titleUI, manageTaskPage.getTitleTask(),"task name was wrong");
+        Assert.assertEquals(titleTaskUI, manageTaskPage.getTitleTask(), "task name was wrong");
     }
+
 }

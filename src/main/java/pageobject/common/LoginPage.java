@@ -5,27 +5,26 @@ import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import src.core.driver.AndroidDriverAction;
 
-public class LoginPage extends AndroidDriverAction{
-
-    public LoginPage(AndroidDriver<MobileElement> driver){
-        super(driver);
-    }
-
+public class LoginPage extends AndroidDriverAction {
 
     By btnSignIn = By.id("com.todoist:id/btn_google");
     By signInMail = By.id("com.google.android.gms:id/container");
-    By getText   = By.xpath("//android.widget.TextView[@text='Shopping list']");
+    By getText = By.xpath("//android.widget.TextView[@text='Shopping list']");
 
-    public void signInWithGoogle(){
+    public LoginPage(AndroidDriver<MobileElement> driver) {
+        super(driver);
+    }
+
+    public void signInWithGoogle() {
         clickElement(btnSignIn);
     }
 
-    public void chooseAccount(){
+    public void chooseAccount() {
         clickElement(signInMail);
         wait(5000);
     }
 
-    public void login(){
+    public void login() {
         signInWithGoogle();
         chooseAccount();
     }

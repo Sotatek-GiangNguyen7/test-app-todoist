@@ -5,6 +5,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -16,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TestSetUp {
     public AndroidDriver<MobileElement> driver;
-    @BeforeTest
+    @BeforeMethod(alwaysRun = true)
     public void setup() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("deviceName", "emulator_5554");
@@ -28,8 +29,8 @@ public class TestSetUp {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    @AfterTest
-    public void closeTabs() throws AWTException {
+    @AfterMethod(alwaysRun = true)
+    public void shutDown() throws AWTException {
         driver.quit();
     }
 }

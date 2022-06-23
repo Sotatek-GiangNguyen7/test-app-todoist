@@ -4,7 +4,15 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.offset.PointOption;
+import joptsimple.internal.Strings;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+
+import java.util.UUID;
+import java.util.Enumeration;
+import java.util.Random;
 
 public class AndroidDriverAction {
     public AndroidDriver<MobileElement> driver;
@@ -20,6 +28,7 @@ public class AndroidDriverAction {
 
     public MobileElement findElement(By locator) {
         MobileElement e = driver.findElement(locator);
+        elementFocus(e);
         return e;
     }
 
@@ -41,8 +50,12 @@ public class AndroidDriverAction {
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+    public void elementFocus(WebElement element)
+    {
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].style.border = '2px solid red';", element);
     }
 }

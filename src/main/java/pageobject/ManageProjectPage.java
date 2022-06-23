@@ -11,7 +11,7 @@ public class ManageProjectPage extends AndroidDriverAction {
     }
 
     By menuBtn   = By.xpath("//android.widget.ImageButton[@content-desc=\"Menu\"]");
-    By manageProjects   = By.id("com.todoist:id/section");
+    By manageProjectsElm   = By.xpath("//android.widget.TextView[@text='Manage projects']");
     By getText   = By.xpath("//android.widget.TextView[@text='Shopping list']");
 
 
@@ -20,8 +20,8 @@ public class ManageProjectPage extends AndroidDriverAction {
         wait(5000);
     }
 
-    public void manageProject(){
-        tapAction(256,1276);
+    public void clickManageProject(){
+        clickElement(manageProjectsElm);
     }
 
     public String getProjectName(){

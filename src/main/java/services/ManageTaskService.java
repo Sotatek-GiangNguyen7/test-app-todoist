@@ -36,4 +36,9 @@ public class ManageTaskService {
         TaskObject[] nameObject = getTaskDetail(token);
         return nameObject[nameObject.length - 1].id;
     }
+    public String getNewestContent(String token)
+    {
+        TaskObject[] nameObject = getTaskDetail(token);
+        return nameObject[nameObject.length - 1].content;
+    }
 }

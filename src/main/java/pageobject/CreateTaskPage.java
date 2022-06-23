@@ -1,5 +1,6 @@
 package pageobject;
 
+import dto.TaskObject;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -31,7 +32,7 @@ public class CreateTaskPage extends AndroidDriverAction {
     public void backHome(){
         tapAction(542,232);
     }
-    public void checkMark(){
+    public void ClickCompleteTask(){
         clickElement(checkMark);
         wait(2000);
     }
@@ -43,5 +44,13 @@ public class CreateTaskPage extends AndroidDriverAction {
         saveTask();
         backHome();
         wait(2000);
+    }
+    public TaskObject getInputDataUI(){
+        TaskObject task = new TaskObject();
+        task.content = getText(title);
+        return task;
+    }
+    public String getTitleTask(){
+        return getText(title);
     }
 }

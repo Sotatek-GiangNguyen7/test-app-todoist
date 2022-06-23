@@ -10,10 +10,10 @@ public class ManageTaskPage extends AndroidDriverAction {
     public ManageTaskPage(AndroidDriver<MobileElement> driver){
         super(driver);
     }
-    String titleString = "//android.widget.TextView[@text='%s']";
 
-    public String getTitle(String key){
-        String title = String.format(titleString, key);
-        return getText(By.xpath(title));
+    By title   = By.id("android:id/message");
+
+    public String getTitleTask(){
+        return getText(title);
     }
 }

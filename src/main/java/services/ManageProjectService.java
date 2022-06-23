@@ -34,7 +34,7 @@ public class ManageProjectService {
         ProjectObject[] nameObject = gson.fromJson(a,ProjectObject[].class);
         return nameObject;
     }
-    public String getNameNewestData(String token)
+    public String getNameNewestName(String token)
     {
         ProjectObject[] nameObject = getProjectDetail(token);
         return nameObject[nameObject.length - 1].name;

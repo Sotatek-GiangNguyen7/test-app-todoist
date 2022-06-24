@@ -20,7 +20,7 @@ public class AppTodoiestTest extends TestSetUp {
 
     @Test(priority = 0)
     public void createProjectAPI() throws InterruptedException {
-        //Create project AP I
+        //Create project API
         ManageProjectService manageProjectService = new ManageProjectService();
         projectName = "Project " + DataGenerateUtils.randomString(5);
         manageProjectService.createProjectAPI(Constant.TOKEN, projectName);

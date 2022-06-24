@@ -20,21 +20,24 @@ public class AppTodoiestTest extends TestSetUp {
 
     @Test(priority = 0)
     public void createProjectAPI() throws InterruptedException {
-        //Create project API
+        //Create project AP I
         ManageProjectService manageProjectService = new ManageProjectService();
         projectName = "Project " + DataGenerateUtils.randomString(5);
         manageProjectService.createProjectAPI(Constant.TOKEN, projectName);
 
         //Login into mobile application
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login();
+        loginPage.loginWithEmail(Constant.USERNAME,Constant.PASSWORD);
 
         //Goto manage project
         NavigationBarPage navigationBarPage = new NavigationBarPage(driver);
         navigationBarPage.clickMenu();
 
+        //project list
+        MenuPage menuPage = new MenuPage(driver);
+        menuPage.clickManageProject();
+
         ManageProjectPage manageProjectPage = new ManageProjectPage(driver);
-        manageProjectPage.clickManageProject();
 
         //Compare project name just created
         Assert.assertEquals(manageProjectPage.getLastestProjectName(), projectName,"Project name was wrong");
@@ -44,7 +47,7 @@ public class AppTodoiestTest extends TestSetUp {
     public void createTaskMobile() {
         //Login into mobile application
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login();
+        loginPage.loginWithEmail(Constant.USERNAME,Constant.PASSWORD);
 
         //create new task in project just created
         String titleTask = "Task " + DataGenerateUtils.randomString(5);
@@ -54,8 +57,8 @@ public class AppTodoiestTest extends TestSetUp {
         navigationBarPage.clickMenu();
 
         MenuPage menuPage = new MenuPage(driver);
-        menuPage.selectProject(projectName);
-        navigationBarPage.addTask();
+        menuPage.selectProject();
+        navigationBarPage.clickAddTaskBtn();
 
         CreateTaskPage createTaskPage = new CreateTaskPage(driver);
         createTaskPage.createTask(titleTask, taskDescription);
@@ -69,9 +72,9 @@ public class AppTodoiestTest extends TestSetUp {
     public void reopenTask() {
         //login
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login();
+        loginPage.loginWithEmail(Constant.USERNAME,Constant.PASSWORD);
 
-        //get id task just created
+        //get id task just created API
         ManageTaskService manageTaskService = new ManageTaskService();
         String id = manageTaskService.getNewestId(Constant.TOKEN);
 
@@ -79,8 +82,10 @@ public class AppTodoiestTest extends TestSetUp {
         NavigationBarPage navigationBarPage = new NavigationBarPage(driver);
         navigationBarPage.clickMenu();
 
+        MenuPage menuPage = new MenuPage(driver);
+        menuPage.selectProject();
+
         ManageTaskPage manageTaskPage = new ManageTaskPage(driver);
-        manageTaskPage.selectProject();
         String titleTaskUI = manageTaskPage.getTitleTask();
 
         //complete task

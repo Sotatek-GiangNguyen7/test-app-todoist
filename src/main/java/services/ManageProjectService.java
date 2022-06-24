@@ -23,7 +23,7 @@ public class ManageProjectService {
         APIRequest apiRequest = new APIRequest();
         APIResponse res = apiRequest.setBaseURI(Constant.API_PROJECT)
                 .setInstances()
-                .setToken("abeab110d8c29bbfab9fae46da9f3e21fffbd436")
+                .setToken(token)
                 .getResponse();
         return res;
     }

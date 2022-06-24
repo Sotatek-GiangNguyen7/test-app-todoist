@@ -19,7 +19,7 @@ public class NavigationBarPage extends AndroidDriverAction {
         clickElement(menuBtn);
     }
 
-    public void addTask() {
+    public void clickAddTaskBtn() {
         clickElement(createTaskBtn);
     }
 }

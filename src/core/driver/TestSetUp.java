@@ -3,6 +3,7 @@ package src.core.driver;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -15,7 +16,12 @@ import java.util.concurrent.TimeUnit;
 
 public class TestSetUp {
     public AndroidDriver<MobileElement> driver;
-    public WebDriverWait                wait;
+    public WebDriverWait wait;
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+
     @BeforeMethod(alwaysRun = true)
     public void setup() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();

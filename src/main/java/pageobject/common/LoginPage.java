@@ -9,7 +9,6 @@ public class LoginPage extends AndroidDriverAction {
 
     By btnSignIn = By.id("com.todoist:id/btn_google");
     By signInMail = By.id("com.google.android.gms:id/container");
-    By getText = By.xpath("//android.widget.TextView[@text='Shopping list']");
 
     public LoginPage(AndroidDriver<MobileElement> driver) {
         super(driver);

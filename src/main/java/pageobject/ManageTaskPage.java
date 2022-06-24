@@ -8,23 +8,21 @@ import src.core.driver.AndroidDriverAction;
 public class ManageTaskPage extends AndroidDriverAction {
 
     By title = By.id("com.todoist:id/text");
-    By menuBtn = By.xpath("//android.widget.ImageButton[@content-desc=\"Menu\"]");
-    String projectNameString = "//android.widget.TextView[@text='%s']";
+    By projectName = By.xpath("(//*[@resource-id='com.todoist:id/name'])[last()]");
+    By checkMark = By.xpath("(//android.widget.CheckBox[@content-desc=\"Complete\"])[last()]");
     public ManageTaskPage(AndroidDriver<MobileElement> driver) {
         super(driver);
     }
-    public void selectMenu() {
-        clickElement(menuBtn);
-        wait(5000);
+
+    public void selectProject(){
+        clickElement(projectName);
     }
-    public void selectProject(String projectTitle){
-        String projectName = String.format(projectNameString, projectTitle);
-        clickElement(By.xpath(projectName));
+
+    public void clickCompleteTask() {
+        clickElement(checkMark);
+        wait(2000);
     }
-    public void openProject(String projectTitle){
-        selectMenu();
-        selectProject(projectTitle);
-    }
+
     public String getTitleTask() {
         String titleName = getText(title);
         return titleName;

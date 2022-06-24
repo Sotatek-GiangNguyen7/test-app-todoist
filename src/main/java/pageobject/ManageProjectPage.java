@@ -8,7 +8,7 @@ import src.core.driver.AndroidDriverAction;
 public class ManageProjectPage extends AndroidDriverAction {
     By menuBtn = By.xpath("//android.widget.ImageButton[@content-desc=\"Menu\"]");
     By manageProjectsElm = By.xpath("//android.widget.TextView[@text='Manage projects']");
-    String getText = "//android.widget.TextView[@text='%s']";
+    By projectName  = By.xpath("(//*[@resource-id='com.todoist:id/name'])[last()]");
 
     public ManageProjectPage(AndroidDriver<MobileElement> driver) {
         super(driver);
@@ -23,9 +23,8 @@ public class ManageProjectPage extends AndroidDriverAction {
         clickElement(manageProjectsElm);
     }
 
-    public String getProjectName(String projectName) {
-        String name = String.format(getText, projectName);
-        return getText(By.xpath(name));
+    public String getLastestProjectName(){
+        return getText(projectName);
     }
 
 }

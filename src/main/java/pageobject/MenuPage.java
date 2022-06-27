@@ -11,7 +11,7 @@ public class MenuPage extends AndroidDriverAction {
     By projectName = By.xpath("(//*[@resource-id='com.todoist:id/name'])[last()]");
     By manageProjectsElm = By.xpath("//android.widget.TextView[@text='Manage projects']");
 
-    public void selectProject(){
+    public void selectLastProject(){
         clickElement(projectName);
     }
     public void clickManageProject() {

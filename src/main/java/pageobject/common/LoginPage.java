@@ -64,6 +64,7 @@ public class LoginPage extends AndroidDriverAction {
         clickContinueWithEmail();
         inputPassword(password);
         clickLoginBtn();
+        //Back to homepage
         nagativeBack();
         wait(2000);
         nagativeBack();

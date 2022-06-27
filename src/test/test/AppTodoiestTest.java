@@ -16,13 +16,12 @@ import utils.listeners.TestListener;
 
 @Listeners({TestListener.class})
 public class AppTodoiestTest extends TestSetUp {
-    private String projectName;
 
     @Test(priority = 0)
     public void createProjectAPI() throws InterruptedException {
         //Create project API
         ManageProjectService manageProjectService = new ManageProjectService();
-        projectName = "Project " + DataGenerateUtils.randomString(5);
+        String projectName = "Project " + DataGenerateUtils.randomString(5);
         manageProjectService.createProjectAPI(Constant.TOKEN, projectName);
 
         //Login into mobile application
@@ -57,7 +56,7 @@ public class AppTodoiestTest extends TestSetUp {
         navigationBarPage.clickMenu();
 
         MenuPage menuPage = new MenuPage(driver);
-        menuPage.selectProject();
+        menuPage.selectLastProject();
         navigationBarPage.clickAddTaskBtn();
 
         CreateTaskPage createTaskPage = new CreateTaskPage(driver);
@@ -83,7 +82,7 @@ public class AppTodoiestTest extends TestSetUp {
         navigationBarPage.clickMenu();
 
         MenuPage menuPage = new MenuPage(driver);
-        menuPage.selectProject();
+        menuPage.selectLastProject();
 
         ManageTaskPage manageTaskPage = new ManageTaskPage(driver);
         String titleTaskUI = manageTaskPage.getTitleTask();
